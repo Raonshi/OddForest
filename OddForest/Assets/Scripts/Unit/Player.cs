@@ -11,14 +11,28 @@ public class Player : MonoBehaviour
     public int atk;         //player's attack point
     public int cri;         //player's critical attack rate;
 
+    public float moveSpeed;
+    public float rollSpeed;
+    public float shieldSpeed;
+
     //Singleton instance
     public static Player instance = null;
 
     //player's animation controller;
     public Animator anim;
-    
-    //FSM
-    public FSM fsm;
+
+    //행동 상태
+    public enum State
+    {
+        Idle,
+        Run,
+        Roll,
+        Attack,
+        Shield,
+        Die,
+    }
+    public State state;
+
 
     private void Awake()
     {
@@ -28,50 +42,28 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        state = State.Idle;
     }
 
     // Update is called once per frame
     void Update()
     {
+        switch(state)
+        {
+            case State.Idle:
+                anim.SetBool("isIdle", true);
+                anim.SetBool("isRun", false);
+                break;
+            case State.Run:
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isRun", true);
+                break;
 
-    }
+        }
 
-}
-
-public class FSM
-{
-    //player's behavior
-    public enum State
-    {
-        Null = 99,
-        Idle = 0,
-        Run = 1,
-        Roll = 2,
-        Shield = 3,
-        Attack = 4,
-    }
-    public State state;
-
-    //This function will be call when Initialize FSM state.
-    public void Initialize()
-    {
-        state = State.Idle;
-    }
-    
-    //This function will be call when enter each state
-    public void Enter()
-    {
-        
-    }
-
-    //This function will be call when change each state
-    public void Change(State enter)
-    {
-        Initialize();
-
-        state = enter;
-        
-        Enter();
+        if(state == State.Run)
+        {
+            transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
+        }
     }
 }
