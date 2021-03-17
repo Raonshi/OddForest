@@ -1,0 +1,590 @@
+fileFormatVersion: 2
+guid: c053b80f133d44c8b8640aa8239e95a5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4506777792419722441
+    second: noBKG_KnightRoll_strip_0
+  - first:
+      213: 8532875479038400191
+    second: noBKG_KnightRoll_strip_1
+  - first:
+      213: 2981369091936592250
+    second: noBKG_KnightRoll_strip_2
+  - first:
+      213: 3305275379054264596
+    second: noBKG_KnightRoll_strip_3
+  - first:
+      213: 2783815152247798542
+    second: noBKG_KnightRoll_strip_4
+  - first:
+      213: 8152189275207067990
+    second: noBKG_KnightRoll_strip_5
+  - first:
+      213: 3766272383136301110
+    second: noBKG_KnightRoll_strip_6
+  - first:
+      213: 3238478497674993634
+    second: noBKG_KnightRoll_strip_7
+  - first:
+      213: -934129196187992631
+    second: noBKG_KnightRoll_strip_8
+  - first:
+      213: -1373237099614559641
+    second: noBKG_KnightRoll_strip_9
+  - first:
+      213: -7895171534871642881
+    second: noBKG_KnightRoll_strip_10
+  - first:
+      213: 1764861174618173453
+    second: noBKG_KnightRoll_strip_11
+  - first:
+      213: -7964737926850929391
+    second: noBKG_KnightRoll_strip_12
+  - first:
+      213: 8826923715950256829
+    second: noBKG_KnightRoll_strip_13
+  - first:
+      213: 851722952711724572
+    second: noBKG_KnightRoll_strip_14
+  - first:
+      213: -1541513601985774774
+    second: Roll_0
+  - first:
+      213: -7983745396288232634
+    second: Roll_1
+  - first:
+      213: -7351514667388473569
+    second: Roll_2
+  - first:
+      213: 5034399978413682347
+    second: Roll_3
+  - first:
+      213: 4811183109302650746
+    second: Roll_4
+  - first:
+      213: -6445079334599217287
+    second: Roll_5
+  - first:
+      213: 2626317227864578352
+    second: Roll_6
+  - first:
+      213: -7728431268270919474
+    second: Roll_7
+  - first:
+      213: 3882943003405358031
+    second: Roll_8
+  - first:
+      213: -7208605204860794167
+    second: Roll_9
+  - first:
+      213: 8331079276981190243
+    second: Roll_10
+  - first:
+      213: 1365093946094608171
+    second: Roll_11
+  - first:
+      213: 3065262925957645692
+    second: Roll_12
+  - first:
+      213: 4962648050274714677
+    second: Roll_13
+  - first:
+      213: -7871441190213488645
+    second: Roll_14
+  - first:
+      213: -462999659910306037
+    second: Player_Roll_0
+  - first:
+      213: 6385356526697221979
+    second: Player_Roll_1
+  - first:
+      213: 3703259466282617875
+    second: Player_Roll_2
+  - first:
+      213: 2728975346641338092
+    second: Player_Roll_3
+  - first:
+      213: -4362454536461382906
+    second: Player_Roll_4
+  - first:
+      213: 6353303952965744977
+    second: Player_Roll_5
+  - first:
+      213: -1687535856415035108
+    second: Player_Roll_6
+  - first:
+      213: 9079239055874304725
+    second: Player_Roll_7
+  - first:
+      213: 8813565459497090075
+    second: Player_Roll_8
+  - first:
+      213: 3627354849991223643
+    second: Player_Roll_9
+  - first:
+      213: 2675550996037021787
+    second: Player_Roll_10
+  - first:
+      213: 4519795500663888298
+    second: Player_Roll_11
+  - first:
+      213: 789377589745040229
+    second: Player_Roll_12
+  - first:
+      213: -8016809641256567503
+    second: Player_Roll_13
+  - first:
+      213: -8198143104457415699
+    second: Player_Roll_14
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_Roll_0
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 20
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b076beb23481399f0800000000000000
+      internalID: -462999659910306037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_1
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 20
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5f82021ee75d9850800000000000000
+      internalID: 6385356526697221979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_2
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 20
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31cc0e62dde946330800000000000000
+      internalID: 3703259466282617875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_3
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 20
+        width: 26
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceefa597e944fd520800000000000000
+      internalID: 2728975346641338092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_4
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 21
+        width: 26
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60b8d6d56b27573c0800000000000000
+      internalID: -4362454536461382906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_5
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 20
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 159bb92b8487b2850800000000000000
+      internalID: 6353303952965744977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_6
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 20
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c11b5ac541ba498e0800000000000000
+      internalID: -1687535856415035108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_7
+      rect:
+        serializedVersion: 2
+        x: 1375
+        y: 20
+        width: 22
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5daad3441dfeffd70800000000000000
+      internalID: 9079239055874304725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_8
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 20
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1cf9f1d613105a70800000000000000
+      internalID: 8813565459497090075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_9
+      rect:
+        serializedVersion: 2
+        x: 1751
+        y: 20
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b59640c7404f65230800000000000000
+      internalID: 3627354849991223643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_10
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 20
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b50ba398477712520800000000000000
+      internalID: 2675550996037021787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_11
+      rect:
+        serializedVersion: 2
+        x: 2116
+        y: 20
+        width: 25
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa9da7a9f0a89be30800000000000000
+      internalID: 4519795500663888298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_12
+      rect:
+        serializedVersion: 2
+        x: 2296
+        y: 20
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56b386e4cbe64fa00800000000000000
+      internalID: 789377589745040229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_13
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 20
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13db9fc2b129eb090800000000000000
+      internalID: -8016809641256567503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Roll_14
+      rect:
+        serializedVersion: 2
+        x: 2656
+        y: 20
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de36ff838485a3e80800000000000000
+      internalID: -8198143104457415699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
