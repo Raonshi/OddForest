@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
@@ -33,6 +34,12 @@ public class Player : MonoBehaviour
     }
     public State state;
     
+    //Attack
+    public int attackCount;
+    public float attackDelay;
+    public float delta;
+    public bool isEnd;
+    
     private void Awake()
     {
         instance = gameObject.GetComponent<Player>();
@@ -41,22 +48,86 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Initialize();
+        InitState();
+        attackDelay = 0.5f;
+        isEnd = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(state == State.Run)
+
+        switch (state)
         {
-            transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
+            case State.Run:
+                transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
+                break;
+            case State.Attack:
+                Attack();
+                break;
+        }
+        
+    }
+
+    public void Attack()
+    {
+        if (isEnd == true)
+        {
+            attackCount++;
+            
+            if (attackCount > 2)
+            {
+                attackDelay = 0.0f;
+                attackCount = 0;
+            }
+
+            anim.SetBool("firstAttack", false);
+            anim.SetBool("secondAttack", false);
+            anim.SetBool("thirdAttack", false);
+            ChangeState(State.Idle);
+        }
+
+        isEnd = false;
+        switch (attackCount)
+        {
+            //first
+            case 0:
+                delta = Time.time;
+                if (CheckAttackCount() == true)
+                {
+                    anim.SetBool("firstAttack", true);
+                }
+                break;
+            case 1:
+                if (CheckAttackCount() == true)
+                {
+                    delta = Time.time;
+                    anim.SetBool("secondAttack", true);
+                }
+                break;
+
+        }
+        
+    }
+
+    public bool CheckAttackCount()
+    {
+        if (attackCount >= 2 || Time.time - delta > attackDelay)
+        {
+            delta = 0.0f;
+            attackCount = 0;
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
-    
+
     //FSM
     #region FSM
     
-    public void Initialize()
+    public void InitState()
     {
         state = State.Idle;
         
@@ -98,7 +169,7 @@ public class Player : MonoBehaviour
     
     public void ChangeState(State change)
     {
-        Initialize();
+        InitState();
         
         EnterState(change);
     }
