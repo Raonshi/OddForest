@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
@@ -10,10 +11,18 @@ public class InputManager : MonoBehaviour
     public bool isLeft;
     public bool isRight;
 
+
+    public int tapCount;
+    public float tapDelay;
+
     // Start is called before the first frame update
     void Start()
     {
+        tapCount = 0;
+        tapDelay = 0.5f;
+        
         isLeft = false;
+        
     }
 
     // Update is called once per frame
@@ -22,25 +31,25 @@ public class InputManager : MonoBehaviour
         if (isLeft == true && isRight == false)
         {
             player.transform.rotation = Quaternion.Euler(0, 180, 0);
-            //player.transform.Translate(new Vector3(player.moveSpeed * Time.deltaTime, 0, 0));
         }
         else if (isRight == true && isLeft == false)
         {
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
-            //player.transform.Translate(new Vector3(player.moveSpeed * Time.deltaTime, 0, 0));
         }
     }
 
+    //Button Input
+    #region MoveInput
     public void OnClickLeft(bool press)
     {
         isLeft = press;
         if(isLeft == true)
         {
-            player.state = Player.State.Run;
+            player.ChangeState(Player.State.Run);
         }
         else
         {
-            player.state = Player.State.Idle;
+            player.ChangeState(Player.State.Idle);
         }
     }
     public void OnClickRight(bool press)
@@ -48,11 +57,13 @@ public class InputManager : MonoBehaviour
         isRight = press;
         if (isRight == true)
         {
-            player.state = Player.State.Run;
+            player.ChangeState(Player.State.Run);
         }
         else
         {
-            player.state = Player.State.Idle;
+            player.ChangeState(Player.State.Idle);
         }
     }
+
+    #endregion
 }
