@@ -18,6 +18,9 @@ public class AnimationEvent : MonoBehaviour
 
     public void EndEvent()
     {
-        Player.instance.isEnd = true;
+        //Player.instance.isEnd = true;
+
+        //첫 공격 위치로 플레이어 이동
+        //Player.instance.gameObject.transform.position = GameObject.Find("Player/Image").transform.position;
     }
 }

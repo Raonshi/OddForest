@@ -33,12 +33,7 @@ public class Player : MonoBehaviour
         Die,
     }
     public State state;
-    
-    //Attack
-    public int attackCount;
-    public float attackDelay;
-    public float delta;
-    public bool isEnd;
+   
     
     private void Awake()
     {
@@ -49,84 +44,52 @@ public class Player : MonoBehaviour
     void Start()
     {
         InitState();
-        attackDelay = 0.5f;
-        isEnd = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        switch (state)
+        if(state == State.Run)
         {
-            case State.Run:
-                transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
-                break;
-            case State.Attack:
-                Attack();
-                break;
+            transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
         }
-        
+
     }
 
-    public void Attack()
+
+    //Player Input
+    #region MoveInput
+    public void OnClickLeft(bool press)
     {
-        if (isEnd == true)
+        if (press == true)
         {
-            attackCount++;
-            
-            if (attackCount > 2)
-            {
-                attackDelay = 0.0f;
-                attackCount = 0;
-            }
-
-            anim.SetBool("firstAttack", false);
-            anim.SetBool("secondAttack", false);
-            anim.SetBool("thirdAttack", false);
-            ChangeState(State.Idle);
-        }
-
-        isEnd = false;
-        switch (attackCount)
-        {
-            //first
-            case 0:
-                delta = Time.time;
-                if (CheckAttackCount() == true)
-                {
-                    anim.SetBool("firstAttack", true);
-                }
-                break;
-            case 1:
-                if (CheckAttackCount() == true)
-                {
-                    delta = Time.time;
-                    anim.SetBool("secondAttack", true);
-                }
-                break;
-
-        }
-        
-    }
-
-    public bool CheckAttackCount()
-    {
-        if (attackCount >= 2 || Time.time - delta > attackDelay)
-        {
-            delta = 0.0f;
-            attackCount = 0;
-            return false;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            ChangeState(Player.State.Run);
         }
         else
         {
-            return true;
+            ChangeState(Player.State.Idle);
         }
     }
+    public void OnClickRight(bool press)
+    {
+        if (press == true)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            ChangeState(Player.State.Run);
+        }
+        else
+        {
+            ChangeState(Player.State.Idle);
+        }
+    }
+    #endregion
+
+
 
     //FSM
     #region FSM
-    
+
     public void InitState()
     {
         state = State.Idle;
@@ -205,6 +168,4 @@ public class Player : MonoBehaviour
     }
 
     #endregion
-    
-    
 }
