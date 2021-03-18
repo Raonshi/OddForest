@@ -153,6 +153,8 @@ MonoBehaviour:
   player: {fileID: 1391720440}
   isLeft: 0
   isRight: 0
+  tapCount: 0
+  tapDelay: 0
 --- !u!4 &98481570
 Transform:
   m_ObjectHideFlags: 0

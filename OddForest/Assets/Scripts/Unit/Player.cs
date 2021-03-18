@@ -32,8 +32,7 @@ public class Player : MonoBehaviour
         Die,
     }
     public State state;
-
-
+    
     private void Awake()
     {
         instance = gameObject.GetComponent<Player>();
@@ -42,28 +41,99 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        state = State.Idle;
+        Initialize();
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch(state)
-        {
-            case State.Idle:
-                anim.SetBool("isIdle", true);
-                anim.SetBool("isRun", false);
-                break;
-            case State.Run:
-                anim.SetBool("isIdle", false);
-                anim.SetBool("isRun", true);
-                break;
-
-        }
-
         if(state == State.Run)
         {
             transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
         }
     }
+    
+    //FSM
+    #region FSM
+    
+    public void Initialize()
+    {
+        state = State.Idle;
+        
+        anim.SetBool("isRun", false);
+        anim.SetBool("isRoll", false);
+        anim.SetBool("isAttack", false);
+        anim.SetBool("isShield", false);
+        anim.SetBool("isDie", false);
+        anim.SetBool("isIdle", true);
+    }
+
+    public void EnterState(State enter)
+    {
+        anim.SetBool("isIdle", false);
+        state = enter;
+        
+        switch (enter)
+        {
+            case State.Idle:
+                IdleAnim();
+                break;
+            case State.Run:
+                RunAnim();
+                break;
+            case State.Roll:
+                RollAnim();
+                break;
+            case State.Attack:
+                AttackAnim();
+                break;
+            case State.Shield:
+                ShieldAnim();
+                break;
+            case State.Die:
+                DieAnim();
+                break;
+        }
+    }
+    
+    public void ChangeState(State change)
+    {
+        Initialize();
+        
+        EnterState(change);
+    }
+
+    public void IdleAnim()
+    {
+        anim.SetBool("isIdle", true);
+    }
+
+    public void RunAnim()
+    {
+        anim.SetBool("isRun", true);
+    }
+
+    public void RollAnim()
+    {
+        anim.SetBool("isRoll", true);
+    }
+
+    public void AttackAnim()
+    {
+        anim.SetBool("isAttack", true);
+    }
+
+    public void ShieldAnim()
+    {
+        anim.SetBool("isShield", true);
+    }
+
+    public void DieAnim()
+    {
+        anim.SetBool("isDie", true);
+    }
+
+    #endregion
+    
+    
 }
