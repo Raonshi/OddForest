@@ -28,6 +28,9 @@ public class Player : MonoBehaviour
     public float attackCount;
     public bool isAttack;
 
+    //roll
+    public bool isRolling;
+    public Vector3 rollPos;
     
     public enum State
     {
@@ -50,6 +53,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         isAttack = false;
+        isRolling = false;
 
         InitState();
     }
@@ -57,26 +61,51 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(state == State.Run)
+
+        switch(state)
         {
-            Run();
-        }
-        else if(state == State.Attack)
-        {
-            Attack();
-        }
+            case State.Run:
+                Run();
+                break;
+            case State.Attack:
+                Attack();
+                break;
+            case State.Shield:
+                Shield();
+                break;
+            case State.Roll:
+                if(transform.position == rollPos)
+                {
+                    transform.position = rollPos;
+                    isRolling = false;
+                    ChangeState(State.Idle);
+                    break;
+                }
+                Roll();
+                break;
+        }    
 
     }
 
+    //이동
     public void Run()
     {
         transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
     }
+
+    //구르기
     public void Roll()
     {
+        if (isRolling == false)
+        {
+            rollPos = new Vector3(transform.position.x + 3, transform.position.y, transform.position.z);
+            isRolling = true;
+        }
+        transform.position = Vector3.MoveTowards(transform.position, rollPos, moveSpeed * Time.deltaTime);
 
     }
 
+    //공격
     public void Attack()
     {
         time += Time.deltaTime;
@@ -104,11 +133,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    //막기
     public void Shield()
     {
-
+        Debug.Log("방패를 들었습니다! 받는 모든 데미지는 절반이 됩니다.");
     }
 
+    //사망처리
     public void Die()
     {
 
@@ -149,10 +180,29 @@ public class Player : MonoBehaviour
         if(isAttack == false)
         {
             attackCount++;
+            time = 0;
+
             ChangeState(State.Attack);
 
             isAttack = true;
         }
+    }
+
+    public void OnClickShield(bool press)
+    {
+        if(press == true)
+        {
+            ChangeState(State.Shield);
+        }
+        else
+        {
+            ChangeState(State.Idle);
+        }
+    }
+
+    public void OnClickRoll()
+    {
+        ChangeState(State.Roll);
     }
 
     #endregion
