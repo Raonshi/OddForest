@@ -22,7 +22,13 @@ public class Player : MonoBehaviour
     //player's animation controller;
     public Animator anim;
 
-    //행동 상태
+    //player attack
+    public float time;
+    public float delay;
+    public float attackCount;
+    public bool isAttack;
+
+    
     public enum State
     {
         Idle,
@@ -43,6 +49,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isAttack = false;
+
         InitState();
     }
 
@@ -51,11 +59,60 @@ public class Player : MonoBehaviour
     {
         if(state == State.Run)
         {
-            transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
+            Run();
+        }
+        else if(state == State.Attack)
+        {
+            Attack();
         }
 
     }
 
+    public void Run()
+    {
+        transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
+    }
+    public void Roll()
+    {
+
+    }
+
+    public void Attack()
+    {
+        time += Time.deltaTime;
+
+        if(time >= delay || attackCount > 3)
+        {
+            isAttack = false;
+            attackCount = 0;
+            time = 0;
+
+            ChangeState(State.Idle);
+        }
+
+        switch (attackCount)
+        {
+            case 1:
+                anim.Play("Player_Attack_0");
+                break;
+            case 2:
+                anim.Play("Player_Attack_1");
+                break;
+            case 3:
+                anim.Play("Player_Attack_2");
+                break;
+        }
+    }
+
+    public void Shield()
+    {
+
+    }
+
+    public void Die()
+    {
+
+    }
 
     //Player Input
     #region MoveInput
@@ -85,7 +142,20 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    #region ActionInput
 
+    public void OnClickAttack()
+    {
+        if(isAttack == false)
+        {
+            attackCount++;
+            ChangeState(State.Attack);
+
+            isAttack = true;
+        }
+    }
+
+    #endregion
 
     //FSM
     #region FSM
@@ -168,4 +238,11 @@ public class Player : MonoBehaviour
     }
 
     #endregion
+
+
+    //Animation Event
+    public void EndEvent()
+    {
+        isAttack = false;
+    }
 }
