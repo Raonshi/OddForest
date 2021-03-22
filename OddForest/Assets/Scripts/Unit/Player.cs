@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Compression;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +26,10 @@ public class Player : MonoBehaviour
     //player's animation controller;
     public Animator anim;
 
+    //player direction
+    public bool isLeft;
+    public bool isRight;
+    
     //player attack
     public float time;
     public float delay;
@@ -55,6 +63,9 @@ public class Player : MonoBehaviour
         isAttack = false;
         isRolling = false;
 
+        isLeft = false;
+        isRight = true;
+
         InitState();
     }
 
@@ -77,6 +88,7 @@ public class Player : MonoBehaviour
                 if(transform.position == rollPos)
                 {
                     transform.position = rollPos;
+                    rollPos = Vector3.zero;
                     isRolling = false;
                     ChangeState(State.Idle);
                     break;
@@ -98,10 +110,18 @@ public class Player : MonoBehaviour
     {
         if (isRolling == false)
         {
-            rollPos = new Vector3(transform.position.x + 3, transform.position.y, transform.position.z);
+            if (isLeft)
+            {
+                rollPos = new Vector3(transform.position.x - 3, transform.position.y, transform.position.z);
+            }
+            else if (isRight)
+            {
+                rollPos = new Vector3(transform.position.x + 3, transform.position.y, transform.position.z);
+            }
+
             isRolling = true;
         }
-        transform.position = Vector3.MoveTowards(transform.position, rollPos, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, rollPos, moveSpeed * 1.5f * Time.deltaTime);
 
     }
 
@@ -151,6 +171,9 @@ public class Player : MonoBehaviour
     {
         if (press == true)
         {
+            isRight = false;
+            isLeft = true;
+            
             transform.rotation = Quaternion.Euler(0, 180, 0);
             ChangeState(Player.State.Run);
         }
@@ -163,6 +186,9 @@ public class Player : MonoBehaviour
     {
         if (press == true)
         {
+            isRight = true;
+            isLeft = false;
+            
             transform.rotation = Quaternion.Euler(0, 0, 0);
             ChangeState(Player.State.Run);
         }
