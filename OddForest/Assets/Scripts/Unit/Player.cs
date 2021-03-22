@@ -40,6 +40,10 @@ public class Player : MonoBehaviour
     public bool isRolling;
     public Vector3 rollPos;
     
+    //camera edge
+    public Transform leftEdge;
+    public Transform rightEdge;
+    
     public enum State
     {
         Idle,
@@ -73,6 +77,15 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+        if (transform.position.x <= leftEdge.position.x)
+        {
+            transform.position = new Vector3(leftEdge.position.x, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x >= rightEdge.position.x)
+        {
+            transform.position = new Vector3(rightEdge.position.x, transform.position.y, transform.position.z);
+        }
+        
         switch(state)
         {
             case State.Run:
