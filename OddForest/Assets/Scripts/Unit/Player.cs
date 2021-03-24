@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO.Compression;
-using System.Numerics;
+﻿using System.Numerics;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.UIElements;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -77,15 +71,10 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if (transform.position.x <= leftEdge.position.x)
-        {
-            transform.position = new Vector3(leftEdge.position.x, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x >= rightEdge.position.x)
-        {
-            transform.position = new Vector3(rightEdge.position.x, transform.position.y, transform.position.z);
-        }
-        
+        CameraAreaCheck();
+
+        CheckTouch();
+
         switch(state)
         {
             case State.Run:
@@ -110,6 +99,35 @@ public class Player : MonoBehaviour
                 break;
         }    
 
+    }
+
+    //터치 감지
+    public void CheckTouch()
+    {
+        if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            UnityEngine.Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            Ray2D ray = new Ray2D(touchPos, UnityEngine.Vector2.zero);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
+
+            foreach(var hit in hits)
+            {
+                Debug.Log(hit.transform.name);
+            }
+        }
+    }
+
+    //카메라 영역 내 이동 체크
+    public void CameraAreaCheck()
+    {
+        if (transform.position.x <= leftEdge.position.x)
+        {
+            transform.position = new Vector3(leftEdge.position.x, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x >= rightEdge.position.x)
+        {
+            transform.position = new Vector3(rightEdge.position.x, transform.position.y, transform.position.z);
+        }
     }
 
     //이동
