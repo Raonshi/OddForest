@@ -9,8 +9,6 @@ public class CameraControl : MonoBehaviour
     public float up;
     public float zoom;
 
-    public GameObject cameraCollider;
-
     public float cameraMoveSpeed;
 
     public GameObject pos;
