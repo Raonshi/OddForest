@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     //player's stat
     public int maxHp;       //player's maximum health point
+    public int currentHp;
     public int atk;         //player's attack point
     public int cri;         //player's critical attack rate;
 
@@ -64,12 +65,17 @@ public class Player : MonoBehaviour
         isLeft = false;
         isRight = true;
 
+        currentHp = maxHp;
+
         InitState();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //플레이어 체력 체크
+        CheckHp();
+
 
         CameraAreaCheck();
 
@@ -99,6 +105,14 @@ public class Player : MonoBehaviour
                 break;
         }    
 
+    }
+
+    public void CheckHp()
+    {
+        if(currentHp <= 0)
+        {
+            ChangeState(State.Die);
+        }
     }
 
     //터치 감지

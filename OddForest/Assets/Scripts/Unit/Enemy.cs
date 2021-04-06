@@ -6,73 +6,174 @@ public class Enemy : MonoBehaviour
 {
     public enum Name
     {
-        Wolf,
         Bat,
+        Wolf,
         Vampire,
         Orge,
     }
-
     public Name name;
+
+    public enum State
+    {
+        Idle,
+        Move,
+        Attack,
+        Die,
+    }
+    public State state;
+
+    public Animator anim;
+    public SpriteRenderer sprite;
 
     public int hp;
     public int atk;
     public float moveSpeed;
 
-    public SpriteRenderer sprite;
+    public float attackRange;
+    public bool attackEvent;
 
+    public Transform target;
 
-    public void Init()
+    private void Start()
     {
-        sprite = gameObject.GetComponent<SpriteRenderer>();
+        InitState();
+        target = GameObject.Find("Player").transform;
+    }
 
-        Sprite[] sp;
+    private void Update()
+    {
+        CheckDistance();
+    }
 
-        switch (name)
+
+    /// <summary>
+    /// 타겟과 자신의 거리를 측정
+    /// </summary>
+    public void CheckDistance()
+    {
+        //공격범위 밖에 타겟이 있을 경우
+        if (Vector3.Distance(target.position, transform.position) >= attackRange)
         {
-            case Name.Wolf:
-                hp = 20;
-                atk = 10;
-                moveSpeed = 2;
+            Chasing();
+        }
+        else
+        {
+            Attack();
+        }
+    }
 
-                sp = Resources.LoadAll<Sprite>("Images/Units/Wolf/Idle");
-                sprite.sprite = sp[0];
+    /// <summary>
+    /// 타겟 추적
+    /// </summary>
+    public void Chasing()
+    {
+        if(anim.GetBool("isMove") == false)
+        {
+            StartCoroutine(ChangeState(State.Move));
+            //ChangeState(State.Move);
+        }
 
-                //sprite.sprite = Resources.Load<Sprite>("Images/Units/Wolf/Idle_0");
+        //타겟이 오른쪽에 있을 경우
+        if(target.position.x - transform.position.x <= 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
 
+        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// 공격
+    /// </summary>
+    public void Attack()
+    {
+        if (anim.GetBool("isAttack") == false)
+        {
+            StartCoroutine(ChangeState(State.Attack));
+        }
+
+        if(attackEvent == true)
+        {
+            Player.instance.currentHp -= atk;
+            attackEvent = false;
+        }
+    }
+
+    //FSM
+    #region FSM
+
+    public void InitState()
+    {
+        state = State.Idle;
+
+        anim.SetBool("isMove", false);
+        anim.SetBool("isAttack", false);
+        anim.SetBool("isDie", false);
+        anim.SetBool("isIdle", true);
+    }
+
+    public void EnterState(State enter)
+    {
+        anim.SetBool("isIdle", false);
+        state = enter;
+
+        switch (enter)
+        {
+            case State.Idle:
+                IdleAnim();
                 break;
-            case Name.Bat:
-                hp = 10;
-                atk = 10;
-                moveSpeed = 3;
-
-                sp = Resources.LoadAll<Sprite>("Images/Units/Bat/Fly");
-                sprite.sprite = sp[0];
-
-                //sprite.sprite = Resources.Load<Sprite>("Images/Units/Bat/Fly_0");
-
+            case State.Move:
+                MoveAnim();
                 break;
-            case Name.Vampire:
-                hp = 150;
-                atk = 25;
-                moveSpeed = 4;
-
-                sp = Resources.LoadAll<Sprite>("Images/Units/Vampire/Idle");
-                sprite.sprite = sp[0];
-
-                //sprite.sprite = Resources.Load<Sprite>("Images/Units/Vampire/Idle_0");
-
+            case State.Attack:
+                AttackAnim();
                 break;
-            case Name.Orge:
-                hp = 300;
-                atk = 60;
-                moveSpeed = 2;
-
-                sp = Resources.LoadAll<Sprite>("Images/Units/Orge/Idle");
-                sprite.sprite = sp[0];
-
-                //sprite.sprite = Resources.Load<Sprite>("Images/Units/Orge/Idle_0");
-
+            case State.Die:
+                DieAnim();
                 break;
         }
+    }
+
+    IEnumerator ChangeState(State change)
+    {
+        InitState();
+        yield return new WaitForSeconds(0.2f);
+        EnterState(change);
+    }
+
+    public void IdleAnim()
+    {
+        anim.SetBool("isIdle", true);
+    }
+
+    public void MoveAnim()
+    {
+        anim.SetBool("isMove", true);
+    }
+
+    public void AttackAnim()
+    {
+        anim.SetBool("isAttack", true);
+    }
+
+    public void FlyAnim()
+    {
+        anim.SetBool("isFly", true);
+    }
+
+    public void DieAnim()
+    {
+        anim.SetBool("isDie", true);
+    }
+
+    #endregion
+
+    public void Event()
+    {
+        attackEvent = true;
     }
 }
