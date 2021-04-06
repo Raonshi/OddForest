@@ -30,17 +30,29 @@ public class Spawner : MonoBehaviour
     {
         int rand = Random.Range(0, 4);
 
-        GameObject obj = new GameObject();
-        obj.AddComponent<Enemy>();
-        obj.AddComponent<SpriteRenderer>();
-
-        Enemy enemy = obj.GetComponent<Enemy>();
-        enemy.name = (Enemy.Name)rand;
-
-        obj.name = enemy.name.ToString();
-        obj.transform.SetParent(this.transform);
-        obj.transform.position = this.transform.position;
-
-        enemy.Init();
+        GameObject obj;
+        switch(rand)
+        {
+            case 0:
+                obj = Instantiate(Resources.Load<GameObject>("Prefabs/Bat"));
+                obj.transform.SetParent(this.transform);
+                obj.transform.position = this.transform.position;
+                break;
+            case 1:
+                obj = Instantiate(Resources.Load<GameObject>("Prefabs/Wolf"));
+                obj.transform.SetParent(this.transform);
+                obj.transform.position = this.transform.position;
+                break;
+            case 2:
+                obj = Instantiate(Resources.Load<GameObject>("Prefabs/Vampire"));
+                obj.transform.SetParent(this.transform);
+                obj.transform.position = this.transform.position;
+                break;
+            case 3:
+                obj = Instantiate(Resources.Load<GameObject>("Prefabs/Ogre"));
+                obj.transform.SetParent(this.transform);
+                obj.transform.position = this.transform.position;
+                break;
+        }
     }
 }
