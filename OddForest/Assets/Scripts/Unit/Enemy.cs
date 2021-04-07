@@ -34,14 +34,25 @@ public class Enemy : MonoBehaviour
 
     public Transform target;
 
+    public bool dieEvent;
+
     private void Start()
     {
+        attackEvent = false;
+        dieEvent = false;
+
         InitState();
         target = GameObject.Find("Player").transform;
     }
 
     private void Update()
     {
+        if(hp <= 0)
+        {
+            Died();
+            return;
+        }
+
         CheckDistance();
     }
 
@@ -100,6 +111,20 @@ public class Enemy : MonoBehaviour
         {
             Player.instance.currentHp -= atk;
             attackEvent = false;
+        }
+    }
+
+
+    /// <summary>
+    /// 사망 처리
+    /// </summary>
+    public void Died()
+    {
+        StartCoroutine(ChangeState(State.Die));
+
+        if(dieEvent == true)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -172,8 +197,13 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
-    public void Event()
+    public void AttackEvent()
     {
         attackEvent = true;
+    }
+
+    public void DieEvent()
+    {
+        dieEvent = true;
     }
 }

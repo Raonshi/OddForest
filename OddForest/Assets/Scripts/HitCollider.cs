@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class HitCollider : MonoBehaviour
 {
-    public void OnTriggerStay2D(Collider2D other)
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().hp -= Player.instance.atk;
+            Debug.Log("Enter!");
+            collision.GetComponent<Enemy>().hp -= Player.instance.atk;
         }
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(transform.position, 0.5f);
     }
 }

@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
 
         if (delta <= 0)
         {
-            //소환
+            //소환 -> 
             SpawnEnemy();
             delta = spawnTime;
         }
