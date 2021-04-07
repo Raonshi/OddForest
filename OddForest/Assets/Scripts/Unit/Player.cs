@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Numerics;
+//using System.Numerics;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -7,6 +7,7 @@ using Vector3 = UnityEngine.Vector3;
 public class Player : MonoBehaviour
 {
     //player's stat
+    public int level;
     public int maxHp;       //player's maximum health point
     public int currentHp;
     public int atk;         //player's attack point
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour
     public float delay;
     public float attackCount;
     public bool isAttack;
+    public Transform hitRange;
 
     //roll
     public bool isRolling;
@@ -197,7 +199,6 @@ public class Player : MonoBehaviour
                 anim.Play("Player_Attack_2");
                 break;
         }
-        StartCoroutine(CreateHitCollider());
     }
 
     //막기
@@ -374,12 +375,13 @@ public class Player : MonoBehaviour
         //Create AttackCollider
         GameObject obj = new GameObject("HitCollider");
         obj.transform.SetParent(this.transform);
-        obj.transform.position = new Vector3(this.transform.position.x+1, this.transform.position.y, 0);
+        obj.transform.position = hitRange.position;
         
         obj.AddComponent<BoxCollider2D>();
         obj.AddComponent<HitCollider>();
 
         BoxCollider2D hit = obj.GetComponent<BoxCollider2D>();
+        hit.size = new Vector2(1, 3);
         hit.isTrigger = true;
 
         yield return null;
