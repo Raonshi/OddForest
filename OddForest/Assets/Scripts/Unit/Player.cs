@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Collections;
+using System.Numerics;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -196,6 +197,7 @@ public class Player : MonoBehaviour
                 anim.Play("Player_Attack_2");
                 break;
         }
+        StartCoroutine(CreateHitCollider());
     }
 
     //막기
@@ -365,5 +367,24 @@ public class Player : MonoBehaviour
     public void EndEvent()
     {
         isAttack = false;
+    }
+
+    IEnumerator CreateHitCollider()
+    {
+        //Create AttackCollider
+        GameObject obj = new GameObject("HitCollider");
+        obj.transform.SetParent(this.transform);
+        obj.transform.position = new Vector3(this.transform.position.x+1, this.transform.position.y, 0);
+        
+        obj.AddComponent<BoxCollider2D>();
+        obj.AddComponent<HitCollider>();
+
+        BoxCollider2D hit = obj.GetComponent<BoxCollider2D>();
+        hit.isTrigger = true;
+
+        yield return null;
+        
+        //Hit Collider Delete
+        DestroyImmediate(obj);
     }
 }
