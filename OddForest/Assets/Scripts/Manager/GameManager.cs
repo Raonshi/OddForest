@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public bool isNew = true; //세이브 매니저로 데이터 저장하면 true값 없애야함
     public float internetCheckTime;
 
+
+    //씬 변환
+    public string nextScene;
 
     private static GameManager instance = null;
 
@@ -84,5 +88,11 @@ public class GameManager : MonoBehaviour
                 Debug.Log(string.Format("Internet Connected"));
                 break;
         }
+    }
+
+    public void LoadNextScene(string sceneName)
+    {
+        nextScene = sceneName;
+        SceneManager.LoadScene("Loading");
     }
 }

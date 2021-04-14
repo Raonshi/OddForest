@@ -29,6 +29,6 @@ public class Title : MonoBehaviour
 
     public void OnClickGameStart()
     {
-        SceneManager.LoadScene("Main");
+        GameManager.Singleton.LoadNextScene("Main");
     }
 }

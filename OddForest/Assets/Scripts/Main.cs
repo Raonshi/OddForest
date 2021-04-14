@@ -20,6 +20,8 @@ public class Main : MonoBehaviour
 
     public bool isGame;
 
+    public Spawner spawner1, spawner2;
+
     public static Main instance = null;
     
     // Start is called before the first frame update
@@ -41,16 +43,26 @@ public class Main : MonoBehaviour
         //게임 중일 경우
         if(isGame == true)
         {
+            //UI패널 변경
             topGroupLobby.SetActive(false);
             lobbyGroup.SetActive(false);
             topGroupPlaying.SetActive(true);
             bottomGroup.SetActive(true);
 
+            //플레이어 체력을 체력바에 반영
             hpBar.maxValue = Player.instance.maxHp;
             hpBar.value = Player.instance.currentHp;
 
+            //골드
             goldText.text = string.Format("테스트중...");
             killText.text = string.Format("테스트중...");
+
+
+            //몹 소환
+            //각 스포너에서 번갈아가면서 생성
+            //몹 젠시간 : 5~10초 중 랜덤
+            spawner1.SpawnEnemy(Random.Range(5, 10));
+            spawner2.SpawnEnemy(Random.Range(5, 10));
         }
         //로비일 경우
         else
@@ -61,6 +73,8 @@ public class Main : MonoBehaviour
             bottomGroup.SetActive(false);
         }
     }
+
+
 
     public void OnClickGameStart()
     {
