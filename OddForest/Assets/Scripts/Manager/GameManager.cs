@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        CreateInfoPanel("인터넷연결없음", 1);
     }
 
     // Update is called once per frame
@@ -89,6 +89,23 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+
+    public void CreateInfoPanel(string name, int type)
+    {
+        GameObject obj;
+
+        if (type == 1)
+        {
+            obj = Instantiate(Resources.Load<GameObject>("Prefabs/OneButtonInfoPanel"), GameObject.Find("Canvas").transform);
+        }
+        else
+        {
+            obj = Instantiate(Resources.Load<GameObject>("Prefabs/TwoButtonInfoPanel"), GameObject.Find("Canvas").transform);
+        }
+        obj.GetComponent<InfoPanel>().Init(name, type);
+    }
+
 
     public void LoadNextScene(string sceneName)
     {

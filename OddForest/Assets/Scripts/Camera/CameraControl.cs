@@ -7,7 +7,6 @@ public class CameraControl : MonoBehaviour
 
     public Transform target;
     public float up;
-    public float zoom;
 
     public float cameraMoveSpeed;
 
@@ -31,7 +30,7 @@ public class CameraControl : MonoBehaviour
                 return;
             }
 
-            Vector3 targetPos = new Vector3(target.position.x, target.position.y + up, zoom);
+            Vector3 targetPos = new Vector3(target.position.x, target.position.y + up, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPos, cameraMoveSpeed * Time.deltaTime);
         }
     }
