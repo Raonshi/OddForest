@@ -23,14 +23,16 @@ public class CameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (pos.transform.position.x <= GameObject.Find("CameraWall_Mid").transform.position.x ||
-            pos.transform.position.x >= GameObject.Find("CameraWall_Right").transform.position.x)
+        if (Main.instance.isGame == true)
         {
-            return;
+            if (pos.transform.position.x <= GameObject.Find("CameraWall_Mid").transform.position.x ||
+                pos.transform.position.x >= GameObject.Find("CameraWall_Right").transform.position.x)
+            {
+                return;
+            }
+
+            Vector3 targetPos = new Vector3(target.position.x, target.position.y + up, zoom);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, cameraMoveSpeed * Time.deltaTime);
         }
-        
-        Vector3 targetPos = new Vector3(target.position.x, target.position.y + up, zoom);
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, cameraMoveSpeed * Time.deltaTime);
     }
 }

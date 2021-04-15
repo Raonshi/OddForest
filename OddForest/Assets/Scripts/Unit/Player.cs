@@ -76,9 +76,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //플레이어 체력 체크
         CheckHp();
-
 
         CameraAreaCheck();
 
@@ -133,6 +133,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+
 
     //카메라 영역 내 이동 체크
     public void CameraAreaCheck()
