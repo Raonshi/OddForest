@@ -7,7 +7,6 @@ using Vector3 = UnityEngine.Vector3;
 public class Player : MonoBehaviour
 {
     //player's stat
-    public int level;
     public int maxHp;       //player's maximum health point
     public int currentHp;
     public int atk;         //player's attack point
@@ -110,6 +109,12 @@ public class Player : MonoBehaviour
 
     }
 
+
+    public void UpdateHp()
+    {
+        
+    }
+
     public void CheckHp()
     {
         if(currentHp <= 0)
@@ -171,7 +176,6 @@ public class Player : MonoBehaviour
             isRolling = true;
         }
         transform.position = Vector3.MoveTowards(transform.position, rollPos, moveSpeed * 1.5f * Time.deltaTime);
-
     }
 
     //공격
@@ -301,25 +305,5 @@ public class Player : MonoBehaviour
     public void EndEvent()
     {
         isAttack = false;
-    }
-
-    IEnumerator CreateHitCollider()
-    {
-        //Create AttackCollider
-        GameObject obj = new GameObject("HitCollider");
-        obj.transform.SetParent(this.transform);
-        obj.transform.position = hitRange.position;
-        
-        obj.AddComponent<BoxCollider2D>();
-        obj.AddComponent<HitCollider>();
-
-        BoxCollider2D hit = obj.GetComponent<BoxCollider2D>();
-        hit.size = new Vector2(1, 3);
-        hit.isTrigger = true;
-
-        yield return null;
-        
-        //Hit Collider Delete
-        DestroyImmediate(obj);
     }
 }

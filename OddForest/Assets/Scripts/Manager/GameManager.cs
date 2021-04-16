@@ -5,8 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public bool isNew = true; //세이브 매니저로 데이터 저장하면 true값 없애야함
+    public bool isNew;
     public float internetCheckTime;
+
+    public int hpLevel, atkLevel, criLevel;
+    public const int hp = 100;
+    public const int atk = 10;
+    public const int cri = 0;
+    public int gold, bestScore;
 
 
     //씬 변환
@@ -40,17 +46,24 @@ public class GameManager : MonoBehaviour
         internetCheckTime = 1.0f;
 
         //저장 정보 불러와야함
-
+        SaveManager.Singleton.Init();
+        
         //신규유저일 경우 
-        if(isNew == true)
+        if (isNew == true)
         {
             //초기 정보 설정
             Debug.Log("new Player!");
+
+            hpLevel = atkLevel = criLevel = 1;
+            gold = 0;
+            bestScore = 0;
+
+            isNew = false;
+
+            SaveManager.Singleton.SavePlayerData();
         }
 
         Debug.Log("GameManager Created!");
-
-        SaveManager.Singleton.Init();
     }
 
     // Start is called before the first frame update
