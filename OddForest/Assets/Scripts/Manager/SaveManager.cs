@@ -30,8 +30,6 @@ public class SaveManager : MonoBehaviour
     public void Init()
     {
         Debug.Log("SaveManager has created");
-        SavePlayerData();
-
         LoadPlayerData();
     }
 
@@ -41,7 +39,13 @@ public class SaveManager : MonoBehaviour
     public void SavePlayerData()
     {
         PlayerJson json = new PlayerJson();
-        json.SetData(1, 1, 1, 1, 1);
+        json.SetData(
+            GameManager.Singleton.hpLevel,
+            GameManager.Singleton.atkLevel,
+            GameManager.Singleton.criLevel,
+            GameManager.Singleton.gold,
+            GameManager.Singleton.bestScore,
+            GameManager.Singleton.isNew);
 
         string data = json.Serealize();
         string path = Application.persistentDataPath + "/Save/";
@@ -65,9 +69,12 @@ public class SaveManager : MonoBehaviour
     {
         string path = Application.persistentDataPath + "/Save/";
 
-        if(Directory.Exists(path) == false)
+        if(Directory.Exists(path) == false || File.Exists(path + "player.json") == false)
         {
-            Directory.CreateDirectory(path);
+            Debug.Log("저장 파일이 존재하지 않습니다.");
+            GameManager.Singleton.isNew = true;
+
+            return;
         }
 
         //파일로 저장된 json데이터를 string으로 불러옴
@@ -77,7 +84,11 @@ public class SaveManager : MonoBehaviour
 
         PlayerJson data = JsonUtility.FromJson<PlayerJson>(json);
 
-        Debug.Log(string.Format("hp = {0}, atk = {1}, cri = {2}, gold = {3}, best = {4}", data.maxHp, data.atk, data.cri, data.gold, data.bestScore));
+        GameManager.Singleton.hpLevel = data.hpLevel;
+        GameManager.Singleton.atkLevel = data.atkLevel;
+        GameManager.Singleton.criLevel = data.criLevel;
+        GameManager.Singleton.gold = data.gold;
+        GameManager.Singleton.bestScore = data.bestScore;
     }
 }
 
@@ -86,19 +97,22 @@ public class SaveManager : MonoBehaviour
 
 public class PlayerJson
 {
-    public int maxHp;
-    public int atk;
-    public int cri;
+    public int hpLevel;
+    public int atkLevel;
+    public int criLevel;
     public int gold;
     public int bestScore;
 
-    public void SetData(int _maxHp, int _atk, int _cri, int _gold, int _bestScore)
+    public bool isNew;
+
+    public void SetData(int _hpLevel, int _atkLevel, int _criLevel, int _gold, int _bestScore, bool _isNew)
     {
-        maxHp = _maxHp;
-        atk = _atk;
-        cri = _cri;
+        hpLevel = _hpLevel;
+        atkLevel = _atkLevel;
+        criLevel = _criLevel;
         gold = _gold;
         bestScore = _bestScore;
+        isNew = _isNew;
     }
 
     public string Serealize()

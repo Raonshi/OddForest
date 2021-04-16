@@ -18,6 +18,8 @@ public class Main : MonoBehaviour
     public GameObject topGroupLobby;
     public GameObject lobbyGroup;
 
+    public GameObject statusInfoPanel;
+
     public bool isGame;                     //게임 시작시  true
     public bool isArriveCenter;             //플레이어가 중앙 위치시 true;
     public bool isArriveLobby;              //플레이어가 로비 위치시 true;
@@ -33,6 +35,7 @@ public class Main : MonoBehaviour
         topGroupLobby.SetActive(false);
         lobbyGroup.SetActive(false);
         bottomGroup.SetActive(false);
+        statusInfoPanel.SetActive(true);
 
         instance = this;
         isGame = false;
@@ -83,6 +86,7 @@ public class Main : MonoBehaviour
             topGroupPlaying.SetActive(false);
             bottomGroup.SetActive(false);
 
+
             //플레이어 대기 위치로 이동
             if(isArriveLobby == false)
             {
@@ -123,7 +127,6 @@ public class Main : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(pos, target, Player.instance.moveSpeed * Time.deltaTime);
     }
-
 
     public void OnClickGameStart()
     {
