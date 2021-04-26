@@ -184,12 +184,12 @@ public class Enemy : MonoBehaviour
     {
         anim.SetBool("isAttack", true);
     }
-
+    /*
     public void FlyAnim()
     {
         anim.SetBool("isFly", true);
     }
-
+    */
     public void DieAnim()
     {
         anim.SetBool("isDie", true);

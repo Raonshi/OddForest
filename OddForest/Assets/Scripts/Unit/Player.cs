@@ -51,16 +51,12 @@ public class Player : MonoBehaviour
         Die,
     }
     public State state;
-   
-    
-    private void Awake()
-    {
-        instance = gameObject.GetComponent<Player>();
-    }
 
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+
         isAttack = false;
         isRolling = false;
 
@@ -81,8 +77,6 @@ public class Player : MonoBehaviour
 
         CameraAreaCheck();
 
-        CheckTouch();
-
         switch(state)
         {
             case State.Run:
@@ -100,6 +94,7 @@ public class Player : MonoBehaviour
                     transform.position = rollPos;
                     rollPos = Vector3.zero;
                     isRolling = false;
+                    //StartCoroutine(ChangeState(State.Idle));
                     ChangeState(State.Idle);
                     break;
                 }
@@ -119,23 +114,8 @@ public class Player : MonoBehaviour
     {
         if(currentHp <= 0)
         {
+            //StartCoroutine(ChangeState(State.Die));
             ChangeState(State.Die);
-        }
-    }
-
-    //터치 감지
-    public void CheckTouch()
-    {
-        if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            UnityEngine.Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-            Ray2D ray = new Ray2D(touchPos, UnityEngine.Vector2.zero);
-            RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
-
-            foreach(var hit in hits)
-            {
-                Debug.Log(hit.transform.name);
-            }
         }
     }
 
@@ -189,6 +169,7 @@ public class Player : MonoBehaviour
             attackCount = 0;
             time = 0;
 
+            //StartCoroutine(ChangeState(State.Idle));
             ChangeState(State.Idle);
         }
 
@@ -261,13 +242,24 @@ public class Player : MonoBehaviour
         }
     }
     
+    
     public void ChangeState(State change)
     {
         InitState();
         
         EnterState(change);
     }
+   
+    /*
+    public IEnumerator ChangeState(State change)
+    {
+        InitState();
 
+        yield return null;
+
+        EnterState(change);
+    }
+    */
     public void IdleAnim()
     {
         anim.SetBool("isIdle", true);
@@ -305,5 +297,15 @@ public class Player : MonoBehaviour
     public void EndEvent()
     {
         isAttack = false;
+        ChangeState(Player.State.Idle);
+    }
+
+    public void CreateHitCollider()
+    {
+        GameObject hit = new GameObject("HitCollider");
+        hit.transform.SetParent(transform);
+        hit.transform.position = hitRange.position;
+
+        hit.AddComponent<HitCollider>();
     }
 }

@@ -66,12 +66,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager Created!");
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        CreateInfoPanel("인터넷연결없음", 1);
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -93,6 +87,8 @@ public class GameManager : MonoBehaviour
         {
             //인터넷에 연결되어 있지 않을 경우
             case NetworkReachability.NotReachable:
+                CreateInfoPanel("인터넷연결없음", 1);
+
                 Debug.Log(string.Format("Please Connect Internet"));
                 break;
             //인터넷에 연결되어 있을 경우

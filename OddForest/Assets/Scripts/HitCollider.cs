@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HitCollider : MonoBehaviour
 {
+    float time = 0.5f;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,6 +13,8 @@ public class HitCollider : MonoBehaviour
         {
             Debug.Log("Enter!");
             collision.GetComponent<Enemy>().hp -= Player.instance.atk;
+
+            Dispose();
         }
     }
 
@@ -19,5 +22,20 @@ public class HitCollider : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(transform.position, 0.5f);
+    }
+
+    private void Update()
+    {
+        time -= Time.deltaTime;
+
+        if(time <= 0)
+        {
+            Dispose();
+        }
+    }
+
+    void Dispose()
+    {
+        DestroyImmediate(gameObject);
     }
 }

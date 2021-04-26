@@ -40,6 +40,7 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             Player.instance.isLeft = true;
 
             Player.instance.transform.rotation = Quaternion.Euler(0, 180, 0);
+            //StartCoroutine(Player.instance.ChangeState(Player.State.Run));
             Player.instance.ChangeState(Player.State.Run);
         }
         //그 외
@@ -50,6 +51,7 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             Player.instance.isLeft = false;
 
             Player.instance.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //StartCoroutine(Player.instance.ChangeState(Player.State.Run));
             Player.instance.ChangeState(Player.State.Run);
         }
     }
@@ -77,6 +79,7 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             Player.instance.isLeft = true;
 
             Player.instance.transform.rotation = Quaternion.Euler(0, 180, 0);
+            //StartCoroutine(Player.instance.ChangeState(Player.State.Run));
             Player.instance.ChangeState(Player.State.Run);
         }
         //그 외
@@ -87,6 +90,7 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             Player.instance.isLeft = false;
 
             Player.instance.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //StartCoroutine(Player.instance.ChangeState(Player.State.Run));
             Player.instance.ChangeState(Player.State.Run);
         }
     }
@@ -94,6 +98,7 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public void OnEndDrag(PointerEventData eventData)
     {
         stick.anchoredPosition = Vector2.zero;
+        //StartCoroutine(Player.instance.ChangeState(Player.State.Idle));
         Player.instance.ChangeState(Player.State.Idle);
 
         Debug.Log("End");
@@ -107,7 +112,13 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         {
             player.attackCount++;
             player.time = 0;
-            player.ChangeState(Player.State.Attack);
+
+            if(player.state != Player.State.Attack)
+            {
+                //StartCoroutine(player.ChangeState(Player.State.Attack));
+                player.ChangeState(Player.State.Attack);
+            }
+
             player.isAttack = true;
         }
     }
@@ -116,16 +127,19 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     {
         if (press == true)
         {
+            //StartCoroutine(Player.instance.ChangeState(Player.State.Shield));
             Player.instance.ChangeState(Player.State.Shield);
         }
         else
         {
+            //StartCoroutine(Player.instance.ChangeState(Player.State.Idle));
             Player.instance.ChangeState(Player.State.Idle);
         }
     }
 
     public void OnClickRoll()
     {
+        //StartCoroutine(Player.instance.ChangeState(Player.State.Roll));
         Player.instance.ChangeState(Player.State.Roll);
     }
 }
