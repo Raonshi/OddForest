@@ -35,7 +35,7 @@ public class Main : MonoBehaviour
         topGroupLobby.SetActive(false);
         lobbyGroup.SetActive(false);
         bottomGroup.SetActive(false);
-        statusInfoPanel.SetActive(true);
+        statusInfoPanel.SetActive(false);
 
         instance = this;
         isGame = false;
@@ -55,6 +55,7 @@ public class Main : MonoBehaviour
             lobbyGroup.SetActive(false);
             topGroupPlaying.SetActive(true);
             bottomGroup.SetActive(true);
+            statusInfoPanel.SetActive(false);
 
             //플레이어 체력을 체력바에 반영
             hpBar.maxValue = Player.instance.maxHp;
@@ -67,6 +68,7 @@ public class Main : MonoBehaviour
             //플레이어 위치 이동
             if(isArriveCenter == false)
             {
+                //StartCoroutine(Player.instance.ChangeState(Player.State.Run));
                 Player.instance.ChangeState(Player.State.Run);
                 MoveToCenter();
             }
@@ -85,10 +87,11 @@ public class Main : MonoBehaviour
             lobbyGroup.SetActive(true);
             topGroupPlaying.SetActive(false);
             bottomGroup.SetActive(false);
+            statusInfoPanel.SetActive(true);
 
 
             //플레이어 대기 위치로 이동
-            if(isArriveLobby == false)
+            if (isArriveLobby == false)
             {
                 MoveToLobby();
             }

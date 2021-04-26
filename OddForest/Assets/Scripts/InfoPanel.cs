@@ -55,4 +55,22 @@ public class InfoPanel : MonoBehaviour
         btnText[0].text = string.Format("예");
         btnText[1].text = string.Format("아니오");
     }
+
+
+    #region ButtonAction
+
+    public void OnClickClose()
+    {
+        if(gameObject.name == "인터넷연결없음")
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+        gameObject.SetActive(false);
+    }
+
+#endregion
 }
