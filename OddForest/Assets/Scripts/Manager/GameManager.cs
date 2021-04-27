@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public const int cri = 0;
     public int gold, bestScore;
 
+    public bool restart;
+
 
     //씬 변환
     public string nextScene;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         //기본 변수 셋팅
         internetCheckTime = 1.0f;
+        restart = false;
 
         //저장 정보 불러와야함
         SaveManager.Singleton.Init();

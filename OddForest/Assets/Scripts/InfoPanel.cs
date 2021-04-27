@@ -23,6 +23,7 @@ public class InfoPanel : MonoBehaviour
     {
         gameObject.name = name;
         infoTitle.text = name;
+        infoTitle.fontSize = 100;
 
         btnType = (Type)type;
 
@@ -52,24 +53,63 @@ public class InfoPanel : MonoBehaviour
 
     public void TwoButtonSet()
     {
-        btnText[0].text = string.Format("예");
-        btnText[1].text = string.Format("아니오");
+        switch (gameObject.name)
+        {
+            case "게임오버":
+                btnText[0].text = string.Format("재시작");
+                btnText[1].text = string.Format("귀환");
+                content.text = string.Format("점수 : {0}\n최고기록 : {1}\n획득골드 : {2}", 100, 100, 100);
+                break;
+            case "게임종료":
+                btnText[0].text = string.Format("닫기");
+                btnText[1].text = string.Format("게임종료");
+                content.text = string.Format("게임을 종료하시겠습니까?");
+                break;
+        }
     }
 
 
     #region ButtonAction
-
-    public void OnClickClose()
+    public void OnClickBtn0()
     {
-        if(gameObject.name == "인터넷연결없음")
+        switch (gameObject.name)
         {
+            case "인터넷연결없음":
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+                UnityEditor.EditorApplication.isPlaying = false;
 #else
-            Application.Quit();
+                Application.Quit();
 #endif
+                gameObject.SetActive(false);
+                break;
+
+            case "게임오버":
+                GameManager.Singleton.restart = true;
+                GameManager.Singleton.LoadNextScene("Main");
+                break;
+            case "게임종료":
+                gameObject.SetActive(false);
+                Destroy(gameObject);
+                break;
         }
-        gameObject.SetActive(false);
+    }
+
+    public void OnClickBtn1()
+    {
+        switch (gameObject.name)
+        {
+            case "게임오버":
+                GameManager.Singleton.LoadNextScene("Main");
+                Main.instance.isGame = false;
+                break;
+            case "게임종료":
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+                break;
+        }
     }
 
 #endregion

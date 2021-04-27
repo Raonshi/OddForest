@@ -17,10 +17,12 @@ public class Main : MonoBehaviour
     public GameObject topGroupPlaying;
     public GameObject topGroupLobby;
     public GameObject lobbyGroup;
+    public GameObject optionPanel;
 
     public GameObject statusInfoPanel;
 
     public bool isGame;                     //게임 시작시  true
+    public bool isGameOver;
     public bool isArriveCenter;             //플레이어가 중앙 위치시 true;
     public bool isArriveLobby;              //플레이어가 로비 위치시 true;
 
@@ -36,9 +38,12 @@ public class Main : MonoBehaviour
         lobbyGroup.SetActive(false);
         bottomGroup.SetActive(false);
         statusInfoPanel.SetActive(false);
+        optionPanel.SetActive(false);
 
         instance = this;
-        isGame = false;
+
+        isGame = GameManager.Singleton.restart;
+        isGameOver = false;
         isArriveCenter = false;
         isArriveLobby = false;
         Player.instance.transform.position = lobbyPoint.position;
@@ -68,17 +73,32 @@ public class Main : MonoBehaviour
             //플레이어 위치 이동
             if(isArriveCenter == false)
             {
-                //StartCoroutine(Player.instance.ChangeState(Player.State.Run));
                 Player.instance.ChangeState(Player.State.Run);
                 MoveToCenter();
             }
 
-
             //몹 소환
             //각 스포너에서 번갈아가면서 생성
             //몹 젠시간 : 5~10초 중 랜덤
-            spawner1.SpawnEnemy(Random.Range(5, 10));
-            spawner2.SpawnEnemy(Random.Range(5, 10));
+            if(isGameOver == false)
+            {
+                spawner1.SpawnEnemy(Random.Range(5, 10));
+                spawner2.SpawnEnemy(Random.Range(5, 10));
+            }
+            //게임 오버일 경우
+            else
+            {
+                if(GameObject.Find("게임오버") == null)
+                {
+                    GameManager.Singleton.CreateInfoPanel("게임오버", 2);
+                }
+            }
+
+            //뒤로가기 버튼 누를 경우
+            if(Input.GetKey(KeyCode.Escape))
+            {
+                OnClickOption(true);
+            }
         }
         //로비일 경우
         else
@@ -95,6 +115,12 @@ public class Main : MonoBehaviour
             {
                 MoveToLobby();
             }
+
+            //뒤로가기 버튼 누를 경우
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameManager.Singleton.CreateInfoPanel("게임종료", 2);
+            }
         }
     }
 
@@ -107,6 +133,12 @@ public class Main : MonoBehaviour
         {
             Player.instance.InitState();
             isArriveCenter = true;
+
+            if(GameManager.Singleton.restart == true)
+            {
+                GameManager.Singleton.restart = false;
+            }
+
             return;
         }
         Transform transform = Player.instance.transform;
@@ -129,6 +161,20 @@ public class Main : MonoBehaviour
         Vector3 target = new Vector3(lobbyPoint.position.x, lobbyPoint.position.y, 0);
 
         transform.position = Vector3.MoveTowards(pos, target, Player.instance.moveSpeed * Time.deltaTime);
+    }
+
+
+    public void OnClickOption(bool _isGame)
+    {
+        if(_isGame == true)
+        {
+            optionPanel.GetComponent<OptionPanel>().lobby.gameObject.SetActive(true);
+        }
+        else
+        {
+            optionPanel.GetComponent<OptionPanel>().lobby.gameObject.SetActive(false);
+        }
+        optionPanel.SetActive(true);
     }
 
     public void OnClickGameStart()

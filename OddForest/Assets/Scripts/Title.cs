@@ -20,9 +20,9 @@ public class Title : MonoBehaviour
     void Update()
     {
         //esc버튼(안드로이드 뒤로가기 버튼)터치 시 게임 종료
-        if(Input.GetKey(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            GameManager.Singleton.CreateInfoPanel("게임종료", 2);
         }
     }
 
