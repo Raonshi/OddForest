@@ -94,7 +94,6 @@ public class Player : MonoBehaviour
                     transform.position = rollPos;
                     rollPos = Vector3.zero;
                     isRolling = false;
-                    //StartCoroutine(ChangeState(State.Idle));
                     ChangeState(State.Idle);
                     break;
                 }
@@ -114,8 +113,7 @@ public class Player : MonoBehaviour
     {
         if(currentHp <= 0)
         {
-            //StartCoroutine(ChangeState(State.Die));
-            ChangeState(State.Die);
+            Die();
         }
     }
 
@@ -169,7 +167,6 @@ public class Player : MonoBehaviour
             attackCount = 0;
             time = 0;
 
-            //StartCoroutine(ChangeState(State.Idle));
             ChangeState(State.Idle);
         }
 
@@ -196,7 +193,12 @@ public class Player : MonoBehaviour
     //사망처리
     public void Die()
     {
+        if(state != State.Die)
+        {
+            ChangeState(State.Die);
+        }
 
+        Main.instance.isGameOver = true;
     }
 
     //FSM
@@ -249,17 +251,8 @@ public class Player : MonoBehaviour
         
         EnterState(change);
     }
-   
-    /*
-    public IEnumerator ChangeState(State change)
-    {
-        InitState();
 
-        yield return null;
 
-        EnterState(change);
-    }
-    */
     public void IdleAnim()
     {
         anim.SetBool("isIdle", true);
@@ -305,6 +298,9 @@ public class Player : MonoBehaviour
         GameObject hit = new GameObject("HitCollider");
         hit.transform.SetParent(transform);
         hit.transform.position = hitRange.position;
+
+        hit.AddComponent<BoxCollider2D>();
+        hit.GetComponent<BoxCollider2D>().isTrigger = true;
 
         hit.AddComponent<HitCollider>();
     }

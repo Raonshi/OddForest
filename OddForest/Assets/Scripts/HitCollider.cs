@@ -36,6 +36,6 @@ public class HitCollider : MonoBehaviour
 
     void Dispose()
     {
-        DestroyImmediate(gameObject);
+        Destroy(gameObject);
     }
 }
