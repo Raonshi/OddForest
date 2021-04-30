@@ -19,6 +19,11 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (Player.instance.state != Player.State.Idle)
+        {
+            return;
+        }
+
         Vector2 pos = eventData.position - center.anchoredPosition;
 
         Vector2 vect;
@@ -56,6 +61,11 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (Player.instance.state != Player.State.Run)
+        {
+            return;
+        }
+
         Vector2 pos = eventData.position - center.anchoredPosition;
 
         Vector2 vect;
