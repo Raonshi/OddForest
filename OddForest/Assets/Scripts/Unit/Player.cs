@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
 
     //roll
     public bool isRolling;
-    public Vector3 rollPos;
+    public Transform rollPos;
+    Vector3 tempPos;
     
     //camera edge
     public Transform leftEdge;
@@ -89,11 +90,12 @@ public class Player : MonoBehaviour
                 Shield();
                 break;
             case State.Roll:
-                if(transform.position == rollPos)
+                if(transform.position == tempPos)
                 {
-                    transform.position = rollPos;
-                    rollPos = Vector3.zero;
+                    transform.position = tempPos;
                     isRolling = false;
+
+                    tempPos = Vector3.zero;
                     ChangeState(State.Idle);
                     break;
                 }
@@ -142,18 +144,10 @@ public class Player : MonoBehaviour
     {
         if (isRolling == false)
         {
-            if (isLeft)
-            {
-                rollPos = new Vector3(transform.position.x - 3, transform.position.y, transform.position.z);
-            }
-            else if (isRight)
-            {
-                rollPos = new Vector3(transform.position.x + 3, transform.position.y, transform.position.z);
-            }
-
+            tempPos = new Vector3(rollPos.position.x, rollPos.position.y, rollPos.position.z);
             isRolling = true;
         }
-        transform.position = Vector3.MoveTowards(transform.position, rollPos, moveSpeed * 1.5f * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, tempPos, moveSpeed * 1.5f * Time.deltaTime);
     }
 
     //공격
