@@ -124,6 +124,26 @@ public class Enemy : MonoBehaviour
 
         if(dieEvent == true)
         {
+            switch(name)
+            {
+                case Name.Wolf:
+                    GameManager.Singleton.gold += 100;
+                    Main.instance.score += 100;
+                    break;
+                case Name.Bat:
+                    GameManager.Singleton.gold += 50;
+                    Main.instance.score += 50;
+                    break;
+                case Name.Orge:
+                    GameManager.Singleton.gold += 250;
+                    Main.instance.score += 250;
+                    break;
+                case Name.Vampire:
+                    GameManager.Singleton.gold += 200;
+                    Main.instance.score += 200;
+                    break;
+            }
+            Main.instance.killCount++;
             Destroy(gameObject);
         }
     }

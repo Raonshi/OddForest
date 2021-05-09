@@ -7,6 +7,11 @@ public class HitCollider : MonoBehaviour
 {
     float time = 0.5f;
 
+
+    /// <summary>
+    /// 실질적으로 공격 판정을 내는 함수
+    /// </summary>
+    /// <param name="collision">충돌된 콜라이더</param>
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))

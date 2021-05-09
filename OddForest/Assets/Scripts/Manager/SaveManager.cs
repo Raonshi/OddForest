@@ -100,12 +100,12 @@ public class PlayerJson
     public int hpLevel;
     public int atkLevel;
     public int criLevel;
-    public int gold;
-    public int bestScore;
+    public uint gold;
+    public uint bestScore;
 
     public bool isNew;
 
-    public void SetData(int _hpLevel, int _atkLevel, int _criLevel, int _gold, int _bestScore, bool _isNew)
+    public void SetData(int _hpLevel, int _atkLevel, int _criLevel, uint _gold, uint _bestScore, bool _isNew)
     {
         hpLevel = _hpLevel;
         atkLevel = _atkLevel;

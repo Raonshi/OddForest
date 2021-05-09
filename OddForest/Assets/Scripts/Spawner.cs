@@ -25,9 +25,18 @@ public class Spawner : MonoBehaviour
 
         if (delta <= 0)
         {
-            int rand = Random.Range(0, 4);
-
             GameObject obj;
+            int rand = 0;
+
+            if(Main.instance.killCount <= 10)
+            {
+                rand = Random.Range(0, 2);
+            }
+            else
+            {
+                rand = Random.Range(0, 4);
+            }
+
             switch (rand)
             {
                 case 0:
