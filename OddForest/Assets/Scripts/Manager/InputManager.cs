@@ -109,7 +109,9 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         Debug.Log("End");
     }
 
-
+    /// <summary>
+    /// 공격 버튼 클릭
+    /// </summary>
     public void OnClickAttack()
     {
         Player player = Player.instance;

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public const int hp = 100;
     public const int atk = 10;
     public const int cri = 0;
-    public int gold, bestScore;
+    public uint gold, bestScore;
 
     public bool restart;
 

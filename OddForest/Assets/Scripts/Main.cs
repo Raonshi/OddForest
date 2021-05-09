@@ -5,34 +5,60 @@ using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
-
+    //인게임 상단바
     public Slider hpBar;
-    public Text goldText;
-    public Text killText;
+    public Text goldTextInGame;
+    public Text scoreTextInGame;
+    public Button optionInGame;
 
+    //로비 상단바
+    public Text goldTextLobby;
+    public Text scoreTextLobby;
+    public Button optionLobby;
+
+    //로비, 인게임 캐릭터 시작위치
     public Transform lobbyPoint;
     public Transform startPoint;
 
+    //패널그룹
     public GameObject bottomGroup;
     public GameObject topGroupPlaying;
     public GameObject topGroupLobby;
     public GameObject lobbyGroup;
     public GameObject optionPanel;
-
     public GameObject statusInfoPanel;
 
+    //골드
+    public uint gold;
+
+    //점수
+    public uint score;
+    public uint bestScore;
+
+    //인게임 난이도 레벨
+    public uint gameLevel;
+    public uint killCount;
+
+    //체크용 불값
     public bool isGame;                     //게임 시작시  true
     public bool isGameOver;
     public bool isArriveCenter;             //플레이어가 중앙 위치시 true;
     public bool isArriveLobby;              //플레이어가 로비 위치시 true;
 
+    //인게임 스포너
     public Spawner spawner1, spawner2;
 
+    //싱글턴 객체
     public static Main instance = null;
     
     // Start is called before the first frame update
     void Start()
     {
+        score = 0;
+        bestScore = GameManager.Singleton.bestScore;
+        gameLevel = 1;
+        killCount = 0;
+
         topGroupPlaying.SetActive(false);
         topGroupLobby.SetActive(false);
         lobbyGroup.SetActive(false);
@@ -67,8 +93,8 @@ public class Main : MonoBehaviour
             hpBar.value = Player.instance.currentHp;
 
             //골드
-            goldText.text = string.Format("테스트중...");
-            killText.text = string.Format("테스트중...");
+            goldTextInGame.text = string.Format("{0}", GameManager.Singleton.gold);
+            scoreTextInGame.text = string.Format("{0}", score);
 
             //플레이어 위치 이동
             if(isArriveCenter == false)
@@ -121,6 +147,9 @@ public class Main : MonoBehaviour
             {
                 GameManager.Singleton.CreateInfoPanel("게임종료", 2);
             }
+
+            //상단바 갱신
+            UpdateTopBar();
         }
     }
 
@@ -164,6 +193,12 @@ public class Main : MonoBehaviour
     }
 
 
+    public void UpdateTopBar()
+    {
+        
+    }
+
+
     public void OnClickOption(bool _isGame)
     {
         if(_isGame == true)
@@ -180,5 +215,8 @@ public class Main : MonoBehaviour
     public void OnClickGameStart()
     {
         isGame = true;
+        score = 0;
+        gameLevel = 1;
+        killCount = 0;
     }
 }

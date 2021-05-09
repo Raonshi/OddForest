@@ -58,7 +58,7 @@ public class InfoPanel : MonoBehaviour
             case "게임오버":
                 btnText[0].text = string.Format("재시작");
                 btnText[1].text = string.Format("귀환");
-                content.text = string.Format("점수 : {0}\n최고기록 : {1}\n획득골드 : {2}", 100, 100, 100);
+                content.text = string.Format("점수 : {0}\n최고기록 : {1}\n획득골드 : {2}", Main.instance.score, Main.instance.bestScore, Main.instance.gold);
                 break;
             case "게임종료":
                 btnText[0].text = string.Format("닫기");
@@ -101,6 +101,7 @@ public class InfoPanel : MonoBehaviour
             case "게임오버":
                 GameManager.Singleton.LoadNextScene("Main");
                 Main.instance.isGame = false;
+
                 break;
             case "게임종료":
 #if UNITY_EDITOR
