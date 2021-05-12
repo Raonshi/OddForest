@@ -126,6 +126,14 @@ public class InputManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             }
 
             player.isAttack = true;
+            if(player.attackCount == 1 || player.attackCount == 3)
+            {
+                GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_Attack1"));
+            }
+            else
+            {
+                GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_Attack2"));
+            }
         }
     }
 
