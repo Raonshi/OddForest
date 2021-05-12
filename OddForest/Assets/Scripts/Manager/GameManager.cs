@@ -9,13 +9,18 @@ public class GameManager : MonoBehaviour
     public float internetCheckTime;
 
     public int hpLevel, atkLevel, criLevel;
-    public const int hp = 100;
-    public const int atk = 10;
-    public const int cri = 0;
-    public uint gold, bestScore;
+    public int hp = 100;
+    public int atk = 10;
+    public int cri = 0;
+    public int gold, bestScore;
 
     public bool restart;
 
+    //볼륨 조절
+    public List<AudioSource> audio = new List<AudioSource>();
+    public int audioSourceCount = 10;
+    public float sfxVolume = 0.5f;
+    public float bgmVolume = 0.5f;
 
     //씬 변환
     public string nextScene;
@@ -66,6 +71,17 @@ public class GameManager : MonoBehaviour
             SaveManager.Singleton.SavePlayerData();
         }
 
+        //유저 데이터 불러오기
+        SaveManager.Singleton.LoadPlayerData();
+
+
+        //사운드 초기화
+        for(int i = 0; i < audioSourceCount; i++)
+        {
+            audio.Add(gameObject.AddComponent<AudioSource>());
+            audio[i].Stop();
+        }
+
         Debug.Log("GameManager Created!");
     }
 
@@ -79,6 +95,9 @@ public class GameManager : MonoBehaviour
             CheckInternet();
             internetCheckTime = 1.0f;
         }
+
+        //매 프레임마다 볼륨 체크
+        VolumeControl();
     }
 
     /// <summary>
@@ -102,7 +121,95 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// GameManager의 sfx, bgm값을 통해 볼륨을 조절한다.
+    /// </summary>
+    public void VolumeControl()
+    {
+        for(int i = 0; i < audio.Count; i++)
+        {
+            if(audio[i].clip == null)
+            {
+                continue;
+            }
+            else if(audio[i].clip.name.Contains("BGM_") == true)
+            {
+                audio[i].volume = bgmVolume;
+            }
+            else if(audio[i].clip.name.Contains("SFX_") == true)
+            {
+                audio[i].volume = sfxVolume;
+            }
+        }
+    }
 
+    /// <summary>
+    /// 현재 재생 중인 모든 사운드를 중지한다.
+    /// </summary>
+    public void AllSoundStop()
+    {
+        for(int i = 0; i < audio.Count; i++)
+        {
+            audio[i].Stop();
+            audio[i].clip = null;
+        }
+    }
+
+    /// <summary>
+    /// clip을 재생한다.
+    /// </summary>
+    /// <param name="clip">재생할 사운드 파일</param>
+    public void PlaySound(AudioClip clip)
+    {
+        for (int i = 0; i < audio.Count; i++)
+        {
+            //i번째 사운드가 재생 중인 경우
+            if (audio[i].isPlaying == true)
+            {
+                //clip과 i번째 사운드의 파일명이 같다면
+                if(clip.name == audio[i].clip.name)
+                {
+                    return;
+                }
+                //파일명이 다르면 재생 안함.
+                else
+                {
+                    continue;
+                }
+            }
+            //재생중이 아닌 경우
+            else if (audio[i].isPlaying == false)
+            {
+                //i번째에 추가
+                audio[i].clip = clip;
+                //재생시간 초기화
+                audio[i].time = 0;
+
+                //BGM
+                if (clip.name.Contains("BGM") == true)
+                {
+                    audio[i].volume = 0.5f;
+                    audio[i].loop = true;
+                }
+                //SFX
+                else if (clip.name.Contains("SFX") == true)
+                {
+                    audio[i].loop = false;
+                }
+
+                audio[i].Play();
+                return;
+            }
+
+        }
+    }
+
+
+    /// <summary>
+    /// 팝업창을 인스턴스로 생성한다.
+    /// </summary>
+    /// <param name="name">생성할 팝업창의 이름</param>
+    /// <param name="type">팝업창 버튼 타입(1 : 1버튼, 2 : 2버튼)</param>
     public void CreateInfoPanel(string name, int type)
     {
         GameObject obj;
@@ -116,6 +223,8 @@ public class GameManager : MonoBehaviour
             obj = Instantiate(Resources.Load<GameObject>("Prefabs/TwoButtonInfoPanel"), GameObject.Find("Canvas").transform);
         }
         obj.GetComponent<InfoPanel>().Init(name, type);
+
+        PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_InfoPopup"));
     }
 
 

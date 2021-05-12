@@ -20,6 +20,7 @@ public class Loading : MonoBehaviour
 
     IEnumerator LoadNextScene()
     {
+        GameManager.Singleton.AllSoundStop();
         yield return new WaitForSeconds(1.0f);
 
         AsyncOperation async = SceneManager.LoadSceneAsync(GameManager.Singleton.nextScene);

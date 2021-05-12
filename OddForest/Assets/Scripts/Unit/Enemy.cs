@@ -109,8 +109,16 @@ public class Enemy : MonoBehaviour
 
         if(attackEvent == true)
         {
-            Player.instance.currentHp -= atk;
             attackEvent = false;
+            if (Player.instance.state == Player.State.Roll)
+            {
+                return;
+            }
+            else if(Player.instance.state == Player.State.Shield)
+            {
+                atk = atk / 2;
+            }
+            Player.instance.currentHp -= atk;
         }
     }
 
@@ -127,20 +135,20 @@ public class Enemy : MonoBehaviour
             switch(name)
             {
                 case Name.Wolf:
-                    GameManager.Singleton.gold += 100;
+                    Main.instance.gold += 10;
                     Main.instance.score += 100;
                     break;
                 case Name.Bat:
-                    GameManager.Singleton.gold += 50;
+                    Main.instance.gold += 5;
                     Main.instance.score += 50;
                     break;
                 case Name.Orge:
-                    GameManager.Singleton.gold += 250;
-                    Main.instance.score += 250;
+                    Main.instance.gold += 150;
+                    Main.instance.score += 1500;
                     break;
                 case Name.Vampire:
-                    GameManager.Singleton.gold += 200;
-                    Main.instance.score += 200;
+                    Main.instance.gold += 75;
+                    Main.instance.score += 750;
                     break;
             }
             Main.instance.killCount++;

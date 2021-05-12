@@ -19,17 +19,23 @@ public class StatusInfo : MonoBehaviour
     public void OnClickHp()
     {
         Debug.Log("Hp Upgraded");
+        GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_BtnClick"));
+        GameManager.Singleton.CreateInfoPanel("체력강화", 2);
     }
 
 
     public void OnClickAtk()
     {
         Debug.Log("Atk Upgraded");
+        GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_BtnClick"));
+        GameManager.Singleton.CreateInfoPanel("공격강화", 2);
     }
 
 
     public void OnClickCri()
     {
         Debug.Log("Cri Upgraded");
+        GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_BtnClick"));
+        GameManager.Singleton.CreateInfoPanel("치명강화", 2);
     }
 }

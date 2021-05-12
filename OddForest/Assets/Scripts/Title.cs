@@ -14,6 +14,8 @@ public class Title : MonoBehaviour
         instance = this;
 
         GameManager.Singleton.Init();
+
+        GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/BGM/BGM_Title"));
     }
 
     // Update is called once per frame
@@ -29,6 +31,7 @@ public class Title : MonoBehaviour
 
     public void OnClickGameStart()
     {
+        GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_BtnClick"));
         GameManager.Singleton.LoadNextScene("Main");
     }
 }

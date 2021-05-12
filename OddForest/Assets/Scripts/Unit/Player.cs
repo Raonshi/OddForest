@@ -56,6 +56,11 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //플레이어 초기 정보 세팅
+        maxHp = UpdateHp();
+        atk = UpdateAttack();
+        cri = UpdateCritical();
+
         instance = this;
 
         isAttack = false;
@@ -105,18 +110,45 @@ public class Player : MonoBehaviour
 
     }
 
-
-    public void UpdateHp()
-    {
-        
-    }
-
     public void CheckHp()
     {
         if(currentHp <= 0)
         {
             Die();
         }
+    }
+
+    public int UpdateHp()
+    {
+        return GameManager.Singleton.hp* System.Convert.ToInt32(GameManager.Singleton.hpLevel * 1.15f);
+    }
+
+
+    public int UpdateAttack()
+    {
+        return GameManager.Singleton.atk* System.Convert.ToInt32(GameManager.Singleton.atkLevel * 1.15f);
+    }
+
+
+    public int UpdateCritical()
+    {
+        if(GameManager.Singleton.criLevel == 1)
+        {
+            return 0;
+        }
+        
+        if(GameManager.Singleton.cri <= 10)
+        {
+            return System.Convert.ToInt32(System.Math.Pow(2, GameManager.Singleton.criLevel - 1));
+        }
+        else
+        {
+            int cri = GameManager.Singleton.cri;
+            int level = GameManager.Singleton.criLevel;
+
+            return cri + (level - 6);
+        }
+
     }
 
 
@@ -192,8 +224,16 @@ public class Player : MonoBehaviour
             ChangeState(State.Die);
         }
 
+        StartCoroutine(GameOver());
+    }
+
+
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(0.3f);
         Main.instance.isGameOver = true;
     }
+
 
     //FSM
     #region FSM
