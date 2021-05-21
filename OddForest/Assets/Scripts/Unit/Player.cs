@@ -169,6 +169,9 @@ public class Player : MonoBehaviour
     public void Run()
     {
         transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
+
+        int rand = Random.Range(0, 4);
+        GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_Run" + rand));
     }
 
     //구르기
@@ -337,5 +340,11 @@ public class Player : MonoBehaviour
         hit.GetComponent<BoxCollider2D>().isTrigger = true;
 
         hit.AddComponent<HitCollider>();
+    }
+
+    public void AttackSoundEvent()
+    {
+        int rand = Random.Range(0, 4);
+        GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_Attack" + rand));
     }
 }

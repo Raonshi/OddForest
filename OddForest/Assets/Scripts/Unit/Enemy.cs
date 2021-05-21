@@ -116,9 +116,14 @@ public class Enemy : MonoBehaviour
             }
             else if(Player.instance.state == Player.State.Shield)
             {
-                atk = atk / 2;
+                int rand = Random.Range(0, 4);
+                GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_Shield" + rand));
+                Player.instance.currentHp -= atk / 2;
             }
-            Player.instance.currentHp -= atk;
+            else
+            {
+                Player.instance.currentHp -= atk;
+            }
         }
     }
 
