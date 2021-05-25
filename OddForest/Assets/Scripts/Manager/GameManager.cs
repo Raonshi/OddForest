@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     //씬 변환
     public string nextScene;
 
+
     private static GameManager instance = null;
 
     public static GameManager Singleton
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
             audio.Add(gameObject.AddComponent<AudioSource>());
             audio[i].Stop();
         }
+
 
         Debug.Log("GameManager Created!");
     }
@@ -212,6 +214,10 @@ public class GameManager : MonoBehaviour
     /// <param name="type">팝업창 버튼 타입(1 : 1버튼, 2 : 2버튼)</param>
     public void CreateInfoPanel(string name, int type)
     {
+        if(GameObject.Find("Canvas") == null)
+        {
+            return;
+        }
         GameObject obj;
 
         if (type == 1)

@@ -14,6 +14,7 @@ public class Title : MonoBehaviour
         instance = this;
 
         GameManager.Singleton.Init();
+        AdManager.Singleton.Init();
 
         GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/BGM/BGM_Title"));
     }

@@ -133,7 +133,7 @@ public class Main : MonoBehaviour
             //게임 오버일 경우
             else
             {
-                if(GameObject.Find("게임오버") == null)
+                if(GameObject.Find("게임오버") == null && GameObject.Find("광고시청") == null)
                 {
                     GameManager.Singleton.CreateInfoPanel("게임오버", 2);
                 }
