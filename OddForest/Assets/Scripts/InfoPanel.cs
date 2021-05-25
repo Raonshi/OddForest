@@ -98,6 +98,11 @@ public class InfoPanel : MonoBehaviour
                 content.text = string.Format("강화 비용은 {0}골드입니다.\n소지금 : {1}gold\n강화하시겠습니까?",
                     criPrice, GameManager.Singleton.gold);
                 break;
+            case "광고시청":
+                btnText[0].text = string.Format("아니오");
+                btnText[1].text = string.Format("예");
+                content.text = string.Format("광고를 시청할 경우 현재 획득 골드의 1.5배를 획득할 수 있습니다.\n광고를 시청하겠습니까?");
+                break;
         }
     }
 
@@ -118,8 +123,12 @@ public class InfoPanel : MonoBehaviour
                 break;
 
             case "게임오버":
+                GameManager.Singleton.CreateInfoPanel("광고시청", 2);
+                gameObject.SetActive(false);
+                break;
+            case "광고시청":
                 GameManager.Singleton.gold += Main.instance.gold;
-                if(Main.instance.score > GameManager.Singleton.bestScore)
+                if (Main.instance.score > GameManager.Singleton.bestScore)
                 {
                     GameManager.Singleton.bestScore = Main.instance.score;
                 }
@@ -148,6 +157,7 @@ public class InfoPanel : MonoBehaviour
         {
             case "게임오버":
                 GameManager.Singleton.gold += Main.instance.gold;
+                /*
                 if (Main.instance.score > GameManager.Singleton.bestScore)
                 {
                     GameManager.Singleton.bestScore = Main.instance.score;
@@ -156,7 +166,11 @@ public class InfoPanel : MonoBehaviour
 
                 GameManager.Singleton.LoadNextScene("Main");
                 Main.instance.isGame = false;
-
+                */
+                break;
+            case "광고시청":
+                AdManager.Singleton.gameObject.GetComponent<RewardAd>().WatchAd();
+                gameObject.SetActive(false);
                 break;
             case "게임종료":
 #if UNITY_EDITOR
