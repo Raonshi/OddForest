@@ -109,6 +109,8 @@ public class Enemy : MonoBehaviour
 
         if(attackEvent == true)
         {
+            GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_" + name.ToString() + "Attack"));
+
             attackEvent = false;
             if (Player.instance.state == Player.State.Roll)
             {
@@ -135,7 +137,7 @@ public class Enemy : MonoBehaviour
     {
         StartCoroutine(ChangeState(State.Die));
 
-        if(dieEvent == true)
+        if (dieEvent == true)
         {
             switch(name)
             {
@@ -238,5 +240,7 @@ public class Enemy : MonoBehaviour
     public void DieEvent()
     {
         dieEvent = true;
+
+        GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_" + name.ToString() + "Die"));
     }
 }
