@@ -188,17 +188,6 @@ public class Player : MonoBehaviour
     //공격
     public void Attack()
     {
-        time += Time.deltaTime;
-
-        if(time >= delay || attackCount > 3)
-        {
-            isAttack = false;
-            attackCount = 0;
-            time = 0;
-
-            ChangeState(State.Idle);
-        }
-
         switch (attackCount)
         {
             case 1:
@@ -209,6 +198,7 @@ public class Player : MonoBehaviour
                 break;
             case 3:
                 anim.Play("Player_Attack_2");
+                attackCount = 0;
                 break;
         }
     }
@@ -340,11 +330,5 @@ public class Player : MonoBehaviour
         hit.GetComponent<BoxCollider2D>().isTrigger = true;
 
         hit.AddComponent<HitCollider>();
-    }
-
-    public void AttackSoundEvent()
-    {
-        int rand = Random.Range(0, 4);
-        GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_Attack" + rand));
     }
 }

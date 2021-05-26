@@ -19,9 +19,6 @@ public class HitCollider : MonoBehaviour
             Debug.Log("Enter!");
             collision.GetComponent<Enemy>().hp -= Player.instance.atk;
 
-            int rand = UnityEngine.Random.Range(0, 2);
-            GameManager.Singleton.PlaySound(Resources.Load<AudioClip>("Sounds/SFX/SFX_Hit" + rand));
-
             Dispose();
         }
     }

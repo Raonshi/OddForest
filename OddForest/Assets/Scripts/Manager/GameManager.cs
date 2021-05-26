@@ -171,6 +171,10 @@ public class GameManager : MonoBehaviour
                 //clip과 i번째 사운드의 파일명이 같다면
                 if(clip.name == audio[i].clip.name)
                 {
+                    if(clip.name.Contains("SFX") == true)
+                    {
+                        audio[i].Play();
+                    }
                     return;
                 }
                 //파일명이 다르면 재생 안함.

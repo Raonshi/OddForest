@@ -157,16 +157,6 @@ public class InfoPanel : MonoBehaviour
         {
             case "게임오버":
                 GameManager.Singleton.gold += Main.instance.gold;
-                /*
-                if (Main.instance.score > GameManager.Singleton.bestScore)
-                {
-                    GameManager.Singleton.bestScore = Main.instance.score;
-                }
-                SaveManager.Singleton.SavePlayerData();
-
-                GameManager.Singleton.LoadNextScene("Main");
-                Main.instance.isGame = false;
-                */
                 break;
             case "광고시청":
                 AdManager.Singleton.gameObject.GetComponent<RewardAd>().WatchAd();
