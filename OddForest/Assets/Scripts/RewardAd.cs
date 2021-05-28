@@ -53,7 +53,7 @@ public class RewardAd : MonoBehaviour
         print("광고가 로드되었습니다.");
     }
 
-    private void RewardedAd_OnAdFailedToLoad(object sender, AdFailedToLoadEventArgs e)
+    private void RewardedAd_OnAdFailedToLoad(object sender, AdErrorEventArgs e)
     {
         print("광고 로드에 실패하였습니다 : " + e.ToString());
     }
