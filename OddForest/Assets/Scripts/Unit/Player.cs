@@ -56,11 +56,6 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //플레이어 초기 정보 세팅
-        maxHp = UpdateHp();
-        atk = UpdateAttack();
-        cri = UpdateCritical();
-
         instance = this;
 
         isAttack = false;
@@ -69,6 +64,7 @@ public class Player : MonoBehaviour
         isLeft = false;
         isRight = true;
 
+        maxHp = UpdateHp();
         currentHp = maxHp;
 
         InitState();
@@ -77,9 +73,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //플레이어 초기 정보 세팅
+        maxHp = UpdateHp();
+        atk = UpdateAttack();
+        cri = UpdateCritical();
 
-        //플레이어 체력 체크
-        CheckHp();
+
+        //플레이어 사망 체크
+        if (currentHp <= 0)
+        {
+            Die();
+        }
 
         CameraAreaCheck();
 
@@ -108,14 +112,6 @@ public class Player : MonoBehaviour
                 break;
         }    
 
-    }
-
-    public void CheckHp()
-    {
-        if(currentHp <= 0)
-        {
-            Die();
-        }
     }
 
     public int UpdateHp()

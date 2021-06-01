@@ -157,6 +157,7 @@ public class InfoPanel : MonoBehaviour
         {
             case "게임오버":
                 GameManager.Singleton.gold += Main.instance.gold;
+                GameManager.Singleton.LoadNextScene("Main");
                 break;
             case "광고시청":
                 AdManager.Singleton.gameObject.GetComponent<RewardAd>().WatchAd();
