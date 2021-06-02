@@ -9,12 +9,10 @@ public class RewardAd : MonoBehaviour
     private RewardedAd rewardedAd;
     private string adUnitId = "ca-app-pub-3940256099942544/5224354917";
 
-    // Start is called before the first frame update
     void Start()
     {
         InitAd();
     }
-
 
     public void WatchAd()
     {
@@ -27,7 +25,6 @@ public class RewardAd : MonoBehaviour
             InitAd();
         }
     }
-
 
     public void InitAd()
     {
@@ -44,7 +41,6 @@ public class RewardAd : MonoBehaviour
         rewardedAd.LoadAd(request);
 
     }
-
 
     #region 광고 객체 이벤트 핸들러
 
@@ -74,7 +70,6 @@ public class RewardAd : MonoBehaviour
         string type = "gold";
         double amount = Main.instance.gold * ((e.Amount + 5) * 0.1f);
         GameManager.Singleton.gold += System.Convert.ToInt32(amount);
-
         print("광고 시청 보상을 지급하였습니다 : " + amount.ToString() + " " + type);
     }
 
@@ -89,6 +84,7 @@ public class RewardAd : MonoBehaviour
         }
         SaveManager.Singleton.SavePlayerData();
 
+        GameManager.Singleton.restart = true;
         GameManager.Singleton.LoadNextScene("Main");
         Main.instance.isGame = false;
     }

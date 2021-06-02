@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     //씬 변환
     public string nextScene;
 
-
+    //전역 싱글톤 -> 게임이 종료될때까지 유지
     private static GameManager instance = null;
 
     public static GameManager Singleton
@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+    
+
 
     public void Init()
     {

@@ -54,12 +54,13 @@ public class Main : MonoBehaviour
     //인게임 스포너
     public Spawner spawner1, spawner2;
 
-    //싱글턴 객체
+    //씬 싱글턴 -> 씬(장면)이 전환될때까지 유지
     public static Main instance = null;
     
-    // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+
         score = 0;
         bestScore = GameManager.Singleton.bestScore;
         gameLevel = 1;
@@ -72,8 +73,6 @@ public class Main : MonoBehaviour
         statusInfoPanel.SetActive(false);
         optionPanel.SetActive(false);
         sideGroup.SetActive(false);
-
-        instance = this;
 
         isGame = GameManager.Singleton.restart;
         isGameOver = false;
