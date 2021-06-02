@@ -92,7 +92,6 @@ public class SaveManager : MonoBehaviour
     }
 }
 
-
 #region JSON Data
 
 public class PlayerJson
@@ -102,10 +101,10 @@ public class PlayerJson
     public int criLevel;
     public int gold;
     public int bestScore;
-
     public bool isNew;
 
-    public void SetData(int _hpLevel, int _atkLevel, int _criLevel, int _gold, int _bestScore, bool _isNew)
+    public void SetData(int _hpLevel, int _atkLevel, 
+        int _criLevel, int _gold, int _bestScore, bool _isNew)
     {
         hpLevel = _hpLevel;
         atkLevel = _atkLevel;
